@@ -23,21 +23,21 @@
         <!-- Column Titles -->
         <g class="column-titles">
             <!-- Domain Title -->
-            <g [attr.transform]="'translate(' + (margin.left - 20) + ', 30)'">
-                <rect width="3" height="16" fill="#1890ff" />
-                <text x="10" y="12" class="column-title">DOMAIN</text>
+            <g [attr.transform]="'translate(' + (getDomainX() + columnWidth/2) + ', 30)'">
+                <rect x="-50" y="2" width="3" height="16" fill="#1890ff" />
+                <text x="-40" y="14" class="column-title">DOMAIN</text>
             </g>
-            
+
             <!-- Products Title -->
-            <g [attr.transform]="'translate(' + (getProductX() - 20) + ', 30)'">
-                <rect width="3" height="16" fill="#1890ff" />
-                <text x="10" y="12" class="column-title">PRODUCTS</text>
+            <g [attr.transform]="'translate(' + (getProductX() + columnWidth/2) + ', 30)'">
+                <rect x="-60" y="2" width="3" height="16" fill="#1890ff" />
+                <text x="-50" y="14" class="column-title">PRODUCTS</text>
             </g>
-            
+
             <!-- Data Classification Title -->
-            <g [attr.transform]="'translate(' + (getClassificationX() - 20) + ', 30)'">
-                <rect width="3" height="16" fill="#1890ff" />
-                <text x="10" y="12" class="column-title">DATA CLASSIFICATION</text>
+            <g [attr.transform]="'translate(' + (getClassificationX() + columnWidth/2) + ', 30)'">
+                <rect x="-100" y="2" width="3" height="16" fill="#1890ff" />
+                <text x="-90" y="14" class="column-title">DATA CLASSIFICATION</text>
             </g>
         </g>
 
@@ -45,7 +45,8 @@
         <g class="tree-structure">
             <!-- Main Horizontal Line -->
             <path [attr.d]="generateMainHorizontalLine()"
-                  class="main-line" />
+                  class="main-line"
+                  [class.highlighted]="mainLineHighlighted" />
 
             <!-- Branches -->
             <g class="branches">
@@ -64,7 +65,7 @@
                       [attr.x2]="getDomainX() + columnWidth + 60"
                       [attr.y2]="getMainTrunkY()"
                       class="connection-line" />
-                      
+
                 <!-- Product central line -->
                 <line [attr.x1]="getProductX() + columnWidth + 40"
                       [attr.y1]="(products[0].y + products[products.length-1].y + nodeHeight) / 2"
@@ -116,22 +117,26 @@
                       rx="5" 
                       ry="5" />
                 
-                @if (node.icon) {
-                    <image [attr.href]="node.icon"
+                @if (node.lightIcon || node.darkIcon) {
+                    <image [attr.href]="getCurrentIcon(node)"
                            [attr.x]="getDomainX() + 10"
                            [attr.y]="node.y + (nodeHeight - 20)/2"
                            width="20"
                            height="20"
-                           class="node-icon" />
+                           class="node-icon"
+                           (load)="handleImageLoad(node)"
+                           (error)="handleImageError($event, node)" />
                 }
-                
-                <text [attr.x]="getDomainX() + (node.icon ? 40 : 20)"
+
+                <text [attr.x]="getDomainX() + ((node.lightIcon || node.darkIcon) ? 40 : 20)"
                       [attr.y]="node.y + nodeHeight/2"
                       class="node-text"
-                      [class.highlighted-text]="node.selected">
+                      [class.highlighted-text]="node.selected"
+                      [attr.textLength]="isLongDomainName(node.name) ? 150 : null"
+                      [attr.lengthAdjust]="isLongDomainName(node.name) ? 'spacingAndGlyphs' : null">
                     {{node.name}}
                 </text>
-                
+
                 <text [attr.x]="getDomainX() + columnWidth - 10"
                       [attr.y]="node.y + nodeHeight/2"
                       class="node-count"
@@ -154,22 +159,24 @@
                       rx="5" 
                       ry="5" />
                 
-                @if (node.icon) {
-                    <image [attr.href]="node.icon"
+                @if (node.lightIcon || node.darkIcon) {
+                    <image [attr.href]="getCurrentIcon(node)"
                            [attr.x]="getProductX() + 10"
                            [attr.y]="node.y + (nodeHeight - 20)/2"
                            width="20"
                            height="20"
-                           class="node-icon" />
+                           class="node-icon"
+                           (load)="handleImageLoad(node)"
+                           (error)="handleImageError($event, node)" />
                 }
-                
-                <text [attr.x]="getProductX() + (node.icon ? 40 : 20)"
+
+                <text [attr.x]="getProductX() + ((node.lightIcon || node.darkIcon) ? 40 : 20)"
                       [attr.y]="node.y + nodeHeight/2"
                       class="node-text"
                       [class.highlighted-text]="node.selected">
                     {{node.name}}
                 </text>
-                
+
                 <text [attr.x]="getProductX() + columnWidth - 10"
                       [attr.y]="node.y + nodeHeight/2"
                       class="node-count"
@@ -198,7 +205,7 @@
                       [class.highlighted-text]="node.selected">
                     {{node.name}}
                 </text>
-                
+
                 <text [attr.x]="getClassificationX() + columnWidth - 10"
                       [attr.y]="node.y + nodeHeight/2"
                       class="node-count"

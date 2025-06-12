@@ -19,7 +19,7 @@ export class AppComponent {
       {
         "id": 575,
         "name": "Economy",
-        "light_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
+        "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
         "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
         "count": 179,
         "classifications": [
@@ -27,8 +27,8 @@ export class AppComponent {
             "id": 511,
             "key": "reports",
             "name": "Reports",
-            "light_icon": "/sites/default/files/2023-08/reports-text-black-icon.svg",
-            "dark_icon": "/sites/default/files/2023-08/reports-text-white-icon.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
             "count": 139,
             "data_classifications": [
               {
@@ -61,8 +61,8 @@ export class AppComponent {
             "id": 508,
             "key": "analytical_apps",
             "name": "Analytical Apps",
-            "light_icon": "/sites/default/files/2023-07/Analytical%20apps_new.svg",
-            "dark_icon": "/sites/default/files/2023-07/Analytical%20apps__new.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
             "count": 37,
             "data_classifications": [
               {
@@ -89,8 +89,8 @@ export class AppComponent {
             "id": 509,
             "key": "experimental_statistics",
             "name": "Experimental Statistics",
-            "light_icon": "/sites/default/files/2023-07/IFP%20indicators%20New.svg",
-            "dark_icon": "/sites/default/files/2023-07/IFP%20indicators_new.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
             "count": 3,
             "data_classifications": [
               {
@@ -106,16 +106,16 @@ export class AppComponent {
       {
         "id": 574,
         "name": "Population & Demographic",
-        "light_icon": "/sites/default/files/2023-07/population-black_0.svg",
-        "dark_icon": "/sites/default/files/2023-07/population-white_0.svg",
+        "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+        "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
         "count": 35,
         "classifications": [
           {
             "id": 511,
             "key": "reports",
             "name": "Reports",
-            "light_icon": "/sites/default/files/2023-08/reports-text-black-icon.svg",
-            "dark_icon": "/sites/default/files/2023-08/reports-text-white-icon.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
             "count": 31,
             "data_classifications": [
               {
@@ -130,8 +130,8 @@ export class AppComponent {
             "id": 508,
             "key": "analytical_apps",
             "name": "Analytical Apps",
-            "light_icon": "/sites/default/files/2023-07/Analytical%20apps_new.svg",
-            "dark_icon": "/sites/default/files/2023-07/Analytical%20apps__new.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
             "count": 3,
             "data_classifications": [
               {
@@ -146,8 +146,8 @@ export class AppComponent {
             "id": 509,
             "key": "experimental_statistics",
             "name": "Experimental Statistics",
-            "light_icon": "/sites/default/files/2023-07/IFP%20indicators%20New.svg",
-            "dark_icon": "/sites/default/files/2023-07/IFP%20indicators_new.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
             "count": 1,
             "data_classifications": [
               {
@@ -163,16 +163,16 @@ export class AppComponent {
       {
         "id": 581,
         "name": "Agriculture & Environment",
-        "light_icon": "/sites/default/files/2023-07/environment-black_0.svg",
-        "dark_icon": "/sites/default/files/2023-08/environment-white.svg",
+        "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+        "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
         "count": 6,
         "classifications": [
           {
             "id": 511,
             "key": "reports",
             "name": "Reports",
-            "light_icon": "/sites/default/files/2023-08/reports-text-black-icon.svg",
-            "dark_icon": "/sites/default/files/2023-08/reports-text-white-icon.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
             "count": 6,
             "data_classifications": [
               {
@@ -188,16 +188,16 @@ export class AppComponent {
       {
         "id": 3198,
         "name": "Social Statistics",
-        "light_icon": "/sites/default/files/2023-07/people-community-svgrepo-com_0.svg",
-        "dark_icon": "/sites/default/files/2023-07/people-community-svgrepo-com-white_0.svg",
+        "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+        "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
         "count": 4,
         "classifications": [
           {
             "id": 508,
             "key": "analytical_apps",
             "name": "Analytical Apps",
-            "light_icon": "/sites/default/files/2023-07/Analytical%20apps_new.svg",
-            "dark_icon": "/sites/default/files/2023-07/Analytical%20apps__new.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/1077/1077063.png",
             "count": 3,
             "data_classifications": [
               {
@@ -212,8 +212,8 @@ export class AppComponent {
             "id": 511,
             "key": "reports",
             "name": "Reports",
-            "light_icon": "/sites/default/files/2023-08/reports-text-black-icon.svg",
-            "dark_icon": "/sites/default/files/2023-08/reports-text-white-icon.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
             "count": 1,
             "data_classifications": [
               {
@@ -229,16 +229,16 @@ export class AppComponent {
       {
         "id": 579,
         "name": "Labour Force",
-        "light_icon": "/sites/default/files/2023-07/labour-force.svg",
-        "dark_icon": "/sites/default/files/2023-07/labour-force-svgrepo-white.svg",
+        "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+        "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
         "count": 3,
         "classifications": [
           {
             "id": 508,
             "key": "analytical_apps",
             "name": "Analytical Apps",
-            "light_icon": "/sites/default/files/2023-07/Analytical%20apps_new.svg",
-            "dark_icon": "/sites/default/files/2023-07/Analytical%20apps__new.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/1077/1077063.png",
             "count": 3,
             "data_classifications": [
               {
@@ -260,16 +260,16 @@ export class AppComponent {
       {
         "id": 5004,
         "name": "Census",
-        "light_icon": "/sites/default/files/2024-05/black.svg",
-        "dark_icon": "/sites/default/files/2024-05/white.svg",
+        "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+        "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
         "count": 2,
         "classifications": [
           {
             "id": 508,
             "key": "analytical_apps",
             "name": "Analytical Apps",
-            "light_icon": "/sites/default/files/2023-07/Analytical%20apps_new.svg",
-            "dark_icon": "/sites/default/files/2023-07/Analytical%20apps__new.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/1077/1077063.png",
             "count": 2,
             "data_classifications": [
               {
@@ -285,16 +285,16 @@ export class AppComponent {
       {
         "id": 5231,
         "name": "Executive Insights",
-        "light_icon": "/sites/default/files/2025-03/economy-black_0.svg",
-        "dark_icon": "/sites/default/files/2025-03/economy-white_1.svg",
+        "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+        "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
         "count": 2,
         "classifications": [
           {
             "id": 511,
             "key": "reports",
             "name": "Reports",
-            "light_icon": "/sites/default/files/2023-08/reports-text-black-icon.svg",
-            "dark_icon": "/sites/default/files/2023-08/reports-text-white-icon.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
             "count": 2,
             "data_classifications": [
               {
@@ -310,16 +310,16 @@ export class AppComponent {
       {
         "id": 3199,
         "name": "Industry & Business",
-        "light_icon": "/sites/default/files/2023-07/industry-svgrepo-com_1.svg",
-        "dark_icon": "/sites/default/files/2023-07/industry-svgrepo-white_1.svg",
+        "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+        "dark_icon": "https://cdn-icons-png.flaticon.com/512/25/25231.png",
         "count": 2,
         "classifications": [
           {
             "id": 508,
             "key": "analytical_apps",
             "name": "Analytical Apps",
-            "light_icon": "/sites/default/files/2023-07/Analytical%20apps_new.svg",
-            "dark_icon": "/sites/default/files/2023-07/Analytical%20apps__new.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/1077/1077063.png",
             "count": 1,
             "data_classifications": [
               {
@@ -334,8 +334,8 @@ export class AppComponent {
             "id": 509,
             "key": "experimental_statistics",
             "name": "Experimental Statistics",
-            "light_icon": "/sites/default/files/2023-07/IFP%20indicators%20New.svg",
-            "dark_icon": "/sites/default/files/2023-07/IFP%20indicators_new.svg",
+            "light_icon": "https://cdn-icons-png.flaticon.com/512/733/733553.png",
+            "dark_icon": "https://cdn-icons-png.flaticon.com/512/1077/1077035.png",
             "count": 1,
             "data_classifications": [
               {

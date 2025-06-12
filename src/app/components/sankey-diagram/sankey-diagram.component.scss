@@ -25,10 +25,32 @@
 .tree-structure {
   .main-line {
     fill: none;
-    stroke: #2687FD;
+    stroke: #BFD4ED;
     stroke-width: 1px;
     stroke-linecap: round;
-    opacity: 1;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+
+    &.highlighted {
+      stroke: #2687FD;
+      stroke-width: 2px;
+      opacity: 1;
+    }
+  }
+
+  .connection-line {
+    fill: none;
+    stroke: #BFD4ED;
+    stroke-width: 1px;
+    stroke-linecap: round;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+
+    &.highlighted {
+      stroke: #2687FD;
+      stroke-width: 2px;
+      opacity: 1;
+    }
   }
 
   .branch {
@@ -165,8 +187,18 @@
     stroke: #2687FD;
   }
 
-  .node-text, .node-count {
-    fill: #2687FD;
+  // When not selected, hover text should be white
+  &:not(.selected) {
+    .node-text, .node-count {
+      fill: white;
+    }
+  }
+
+  // When selected, hover text should remain black
+  &.selected {
+    .node-text, .node-count {
+      fill: black;
+    }
   }
 
   + .branch, + .link {

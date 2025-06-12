@@ -1,0 +1,238 @@
+// sankey-diagram.component.scss
+.sankey-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+// Column titles
+.column-titles {
+  .column-title {
+    font-size: 14px;
+    fill: #1890ff;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-anchor: start;
+  }
+}
+
+// Tree Structure
+.tree-structure {
+  .main-line {
+    fill: none;
+    stroke: #2687FD;
+    stroke-width: 1px;
+    stroke-linecap: round;
+    opacity: 1;
+  }
+
+  .branch {
+    fill: none;
+    stroke: #BFD4ED;
+    stroke-width: 1px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: all 0.3s ease;
+    opacity: 0.3;
+
+    &.highlighted {
+      stroke: #2687FD;
+      stroke-width: 2px;
+      opacity: 1;
+    }
+  }
+
+  .link {
+    fill: none;
+    stroke: #BFD4ED;
+    stroke-width: 1px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: all 0.3s ease;
+    opacity: 0.3;
+
+    &.highlighted {
+      stroke: #2687FD;
+      stroke-width: 2px;
+      opacity: 1;
+    }
+  }
+}
+
+// Node Group
+.node-group {
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &.selected {
+    .domain-node {
+      fill: #753EE3;
+      stroke: #753EE3;
+    }
+
+    .product-node {
+      fill: #E39816;
+      stroke: #E39816;
+    }
+
+    .classification-node {
+      fill: #1890FF;
+      stroke: #1890FF;
+    }
+
+    .node-text, .node-count {
+      fill: white;
+    }
+
+    + .branch, + .link {
+      opacity: 1;
+      stroke: #2687FD;
+      stroke-width: 2px;
+    }
+  }
+}
+
+// Node Base Styles
+.node {
+  stroke-width: 1px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+
+  &:hover {
+    stroke: #2687FD;
+    filter: drop-shadow(0 2px 4px rgba(38, 135, 253, 0.15));
+  }
+}
+
+// Node Types
+.domain-node {
+  fill: #EBE5F7;
+  stroke: #D4B3F6;
+}
+
+.product-node {
+  fill: #F2E1B6;
+  stroke: #E6B66C;
+}
+
+.classification-node {
+  fill: #D8EDFF;
+  stroke: #91CAFF;
+}
+
+// Text Styles
+.node-text {
+  font-size: 14px;
+  fill: #666;
+  dominant-baseline: middle;
+  pointer-events: none;
+  transition: all 0.3s ease;
+
+  &.highlighted-text {
+    fill: white;
+  }
+}
+
+.node-count {
+  font-size: 14px;
+  fill: #666;
+  text-anchor: end;
+  dominant-baseline: middle;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+
+  &.highlighted-text {
+    fill: white;
+  }
+}
+
+// Icons
+.node-icon {
+  pointer-events: none;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+// Hover Effects
+.node-group:hover {
+  .node {
+    stroke: #2687FD;
+  }
+
+  .node-text, .node-count {
+    fill: #2687FD;
+  }
+
+  + .branch, + .link {
+    opacity: 1;
+    stroke: #2687FD;
+    stroke-width: 2px;
+  }
+}
+
+// Responsive Styles
+@media (max-width: 1400px) {
+  .sankey-container {
+    margin: 10px;
+    padding: 15px;
+
+    svg {
+      min-height: 600px;
+    }
+  }
+
+  .node-text,
+  .node-count {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sankey-container {
+    overflow-x: auto;
+    padding: 10px;
+
+    svg {
+      min-width: 1200px;
+    }
+  }
+}
+
+// Print Styles
+@media print {
+  .sankey-container {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .branch, .link, .main-line {
+    stroke: #000000;
+    stroke-opacity: 0.2;
+  }
+
+  .node-text,
+  .node-count {
+    fill: #000000;
+  }
+}
+
+// Animation
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sankey-container {
+  animation: fadeIn 0.3s ease-in-out;
+}

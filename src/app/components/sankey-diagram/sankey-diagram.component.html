@@ -1,0 +1,211 @@
+<!-- sankey-diagram.component.html -->
+<div class="sankey-container">
+    <svg [attr.width]="width" [attr.height]="height" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        
+        <!-- Filters -->
+        <defs>
+            <filter id="glow">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+
+            <!-- Additional gradient for glow effect -->
+            <linearGradient id="highlightGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#2687FD;stop-opacity:0.6"/>
+                <stop offset="100%" style="stop-color:#2687FD;stop-opacity:0.2"/>
+            </linearGradient>
+        </defs>
+
+        <!-- Column Titles -->
+        <g class="column-titles">
+            <!-- Domain Title -->
+            <g [attr.transform]="'translate(' + (margin.left - 20) + ', 30)'">
+                <rect width="3" height="16" fill="#1890ff" />
+                <text x="10" y="12" class="column-title">DOMAIN</text>
+            </g>
+            
+            <!-- Products Title -->
+            <g [attr.transform]="'translate(' + (getProductX() - 20) + ', 30)'">
+                <rect width="3" height="16" fill="#1890ff" />
+                <text x="10" y="12" class="column-title">PRODUCTS</text>
+            </g>
+            
+            <!-- Data Classification Title -->
+            <g [attr.transform]="'translate(' + (getClassificationX() - 20) + ', 30)'">
+                <rect width="3" height="16" fill="#1890ff" />
+                <text x="10" y="12" class="column-title">DATA CLASSIFICATION</text>
+            </g>
+        </g>
+
+        <!-- Tree Structure -->
+        <g class="tree-structure">
+            <!-- Main Horizontal Line -->
+            <path [attr.d]="generateMainHorizontalLine()"
+                  class="main-line" />
+
+            <!-- Branches -->
+            <g class="branches">
+                @for (node of domains; track node.id) {
+                    <path [attr.d]="generateBranchPath(node)"
+                          class="branch"
+                          [class.highlighted]="node.selected" />
+                }
+            </g>
+
+            <!-- Central Connection Points -->
+            <g class="central-connections">
+                <!-- Domain central line -->
+                <line [attr.x1]="getDomainX() + columnWidth + 40"
+                      [attr.y1]="getMainTrunkY()"
+                      [attr.x2]="getDomainX() + columnWidth + 60"
+                      [attr.y2]="getMainTrunkY()"
+                      class="connection-line" />
+                      
+                <!-- Product central line -->
+                <line [attr.x1]="getProductX() + columnWidth + 40"
+                      [attr.y1]="(products[0].y + products[products.length-1].y + nodeHeight) / 2"
+                      [attr.x2]="getProductX() + columnWidth + 60"
+                      [attr.y2]="(products[0].y + products[products.length-1].y + nodeHeight) / 2"
+                      class="connection-line" />
+            </g>
+
+            <!-- Links -->
+            <g class="links">
+                <!-- Domain to Product Links -->
+                @for (link of domainToProductLinks; track link.source.id + link.target.id) {
+                    <path [attr.d]="generateSmoothCurvePath(
+                        getDomainX() + columnWidth,
+                        link.source.y,
+                        link.source.height,
+                        getProductX(),
+                        link.target.y,
+                        link.target.height)"
+                        class="link"
+                        [class.highlighted]="link.highlighted" />
+                }
+
+                <!-- Product to Classification Links -->
+                @for (link of productToClassificationLinks; track link.source.id + link.target.id) {
+                    <path [attr.d]="generateSmoothCurvePath(
+                        getProductX() + columnWidth,
+                        link.source.y,
+                        link.source.height,
+                        getClassificationX(),
+                        link.target.y,
+                        link.target.height)"
+                        class="link"
+                        [class.highlighted]="link.highlighted" />
+                }
+            </g>
+        </g>
+
+        <!-- Domain Nodes -->
+        @for (node of domains; track node.id) {
+            <g (click)="onNodeClick(node, $event)" 
+               class="node-group"
+               [class.selected]="node.selected">
+                <rect [attr.x]="getDomainX()"
+                      [attr.y]="node.y"
+                      [attr.width]="columnWidth"
+                      [attr.height]="nodeHeight"
+                      class="node domain-node" 
+                      rx="5" 
+                      ry="5" />
+                
+                @if (node.icon) {
+                    <image [attr.href]="node.icon"
+                           [attr.x]="getDomainX() + 10"
+                           [attr.y]="node.y + (nodeHeight - 20)/2"
+                           width="20"
+                           height="20"
+                           class="node-icon" />
+                }
+                
+                <text [attr.x]="getDomainX() + (node.icon ? 40 : 20)"
+                      [attr.y]="node.y + nodeHeight/2"
+                      class="node-text"
+                      [class.highlighted-text]="node.selected">
+                    {{node.name}}
+                </text>
+                
+                <text [attr.x]="getDomainX() + columnWidth - 10"
+                      [attr.y]="node.y + nodeHeight/2"
+                      class="node-count"
+                      [class.highlighted-text]="node.selected">
+                    {{node.count}}
+                </text>
+            </g>
+        }
+
+        <!-- Product Nodes -->
+        @for (node of products; track node.id) {
+            <g (click)="onNodeClick(node, $event)"
+               class="node-group"
+               [class.selected]="node.selected">
+                <rect [attr.x]="getProductX()"
+                      [attr.y]="node.y"
+                      [attr.width]="columnWidth"
+                      [attr.height]="nodeHeight"
+                      class="node product-node"
+                      rx="5" 
+                      ry="5" />
+                
+                @if (node.icon) {
+                    <image [attr.href]="node.icon"
+                           [attr.x]="getProductX() + 10"
+                           [attr.y]="node.y + (nodeHeight - 20)/2"
+                           width="20"
+                           height="20"
+                           class="node-icon" />
+                }
+                
+                <text [attr.x]="getProductX() + (node.icon ? 40 : 20)"
+                      [attr.y]="node.y + nodeHeight/2"
+                      class="node-text"
+                      [class.highlighted-text]="node.selected">
+                    {{node.name}}
+                </text>
+                
+                <text [attr.x]="getProductX() + columnWidth - 10"
+                      [attr.y]="node.y + nodeHeight/2"
+                      class="node-count"
+                      [class.highlighted-text]="node.selected">
+                    {{node.count}}
+                </text>
+            </g>
+        }
+
+        <!-- Classification Nodes -->
+        @for (node of classifications; track node.id) {
+            <g (click)="onNodeClick(node, $event)"
+               class="node-group"
+               [class.selected]="node.selected">
+                <rect [attr.x]="getClassificationX()"
+                      [attr.y]="node.y"
+                      [attr.width]="columnWidth"
+                      [attr.height]="nodeHeight"
+                      class="node classification-node"
+                      rx="5" 
+                      ry="5" />
+                
+                <text [attr.x]="getClassificationX() + 20"
+                      [attr.y]="node.y + nodeHeight/2"
+                      class="node-text"
+                      [class.highlighted-text]="node.selected">
+                    {{node.name}}
+                </text>
+                
+                <text [attr.x]="getClassificationX() + columnWidth - 10"
+                      [attr.y]="node.y + nodeHeight/2"
+                      class="node-count"
+                      [class.highlighted-text]="node.selected">
+                    {{node.count}} →
+                </text>
+            </g>
+        }
+    </svg>
+</div>

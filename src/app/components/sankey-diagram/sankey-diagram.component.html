@@ -67,11 +67,11 @@
                       class="connection-line" />
 
                 <!-- Product central line -->
-                @if (getVisibleProducts().length > 0) {
+                @if (products.length > 0) {
                     <line [attr.x1]="getProductX() + columnWidth + 40"
-                          [attr.y1]="(getVisibleProducts()[0].y + getVisibleProducts()[getVisibleProducts().length-1].y + nodeHeight) / 2"
+                          [attr.y1]="(products[0].y + products[products.length-1].y + nodeHeight) / 2"
                           [attr.x2]="getProductX() + columnWidth + 60"
-                          [attr.y2]="(getVisibleProducts()[0].y + getVisibleProducts()[getVisibleProducts().length-1].y + nodeHeight) / 2"
+                          [attr.y2]="(products[0].y + products[products.length-1].y + nodeHeight) / 2"
                           class="connection-line" />
                 }
             </g>
@@ -154,75 +154,73 @@
 
         <!-- Product Nodes -->
         @for (node of products; track node.id) {
-            @if (node.count > 0) {
-                <g (click)="onNodeClick(node, $event)"
-                   class="node-group"
-                   [class.selected]="node.selected">
-                    <rect [attr.x]="getProductX()"
-                          [attr.y]="node.y"
-                          [attr.width]="columnWidth"
-                          [attr.height]="nodeHeight"
-                          class="node product-node"
-                          rx="5"
-                          ry="5" />
+            <g (click)="onNodeClick(node, $event)"
+               class="node-group"
+               [class.selected]="node.selected"
+               [class.zero-count]="node.count === 0">
+                <rect [attr.x]="getProductX()"
+                      [attr.y]="node.y"
+                      [attr.width]="columnWidth"
+                      [attr.height]="nodeHeight"
+                      class="node product-node"
+                      rx="5"
+                      ry="5" />
 
-                    @if (node.lightIcon || node.darkIcon) {
-                        <image [attr.href]="getCurrentIcon(node)"
-                               [attr.x]="getProductX() + 10"
-                               [attr.y]="node.y + (nodeHeight - 20)/2"
-                               width="20"
-                               height="20"
-                               class="node-icon"
-                               (load)="handleImageLoad(node)"
-                               (error)="handleImageError($event, node)" />
-                    }
+                @if (node.lightIcon || node.darkIcon) {
+                    <image [attr.href]="getCurrentIcon(node)"
+                           [attr.x]="getProductX() + 10"
+                           [attr.y]="node.y + (nodeHeight - 20)/2"
+                           width="20"
+                           height="20"
+                           class="node-icon"
+                           (load)="handleImageLoad(node)"
+                           (error)="handleImageError($event, node)" />
+                }
 
-                    <text [attr.x]="getProductX() + ((node.lightIcon || node.darkIcon) ? 40 : 20)"
-                          [attr.y]="node.y + nodeHeight/2"
-                          class="node-text"
-                          [class.highlighted-text]="node.selected">
-                        {{node.name}}
-                    </text>
+                <text [attr.x]="getProductX() + ((node.lightIcon || node.darkIcon) ? 40 : 20)"
+                      [attr.y]="node.y + nodeHeight/2"
+                      class="node-text"
+                      [class.highlighted-text]="node.selected">
+                    {{node.name}}
+                </text>
 
-                    <text [attr.x]="getProductX() + columnWidth - 10"
-                          [attr.y]="node.y + nodeHeight/2"
-                          class="node-count"
-                          [class.highlighted-text]="node.selected">
-                        {{node.count}}
-                    </text>
-                </g>
-            }
+                <text [attr.x]="getProductX() + columnWidth - 10"
+                      [attr.y]="node.y + nodeHeight/2"
+                      class="node-count"
+                      [class.highlighted-text]="node.selected">
+                    {{node.count}}
+                </text>
+            </g>
         }
 
         <!-- Classification Nodes -->
         @for (node of classifications; track node.id) {
-            @if (node.count > 0) {
-                <g (click)="onNodeClick(node, $event)"
-                   class="node-group"
-                   [class.selected]="node.selected">
-                    <rect [attr.x]="getClassificationX()"
-                          [attr.y]="node.y"
-                          [attr.width]="columnWidth"
-                          [attr.height]="nodeHeight"
-                          class="node classification-node"
-                          rx="5"
-                          ry="5" />
+            <g (click)="onNodeClick(node, $event)"
+               class="node-group"
+               [class.selected]="node.selected"
+               [class.zero-count]="node.count === 0">
+                <rect [attr.x]="getClassificationX()"
+                      [attr.y]="node.y"
+                      [attr.width]="columnWidth"
+                      [attr.height]="nodeHeight"
+                      class="node classification-node"
+                      rx="5"
+                      ry="5" />
 
-                    <text [attr.x]="getClassificationX() + 20"
-                          [attr.y]="node.y + nodeHeight/2"
-                          class="node-text"
-                          [class.highlighted-text]="node.selected">
-                        {{node.name}}
-                    </text>
+                <text [attr.x]="getClassificationX() + 20"
+                      [attr.y]="node.y + nodeHeight/2"
+                      class="node-text"
+                      [class.highlighted-text]="node.selected">
+                    {{node.name}}
+                </text>
 
-                    <text [attr.x]="getClassificationX() + columnWidth - 10"
-                          [attr.y]="node.y + nodeHeight/2"
-                          class="node-count"
-                          [class.highlighted-text]="node.selected">
-                        {{node.count}} →
-                    </text>
-                </g>
-            }
+                <text [attr.x]="getClassificationX() + columnWidth - 10"
+                      [attr.y]="node.y + nodeHeight/2"
+                      class="node-count"
+                      [class.highlighted-text]="node.selected">
+                    {{node.count}} →
+                </text>
+            </g>
         }
     </svg>
 </div>

@@ -265,9 +265,8 @@ export class SankeyDiagramComponent implements OnInit {
 
     // Calculate middle points
     const sourceMidY = (this.domains[0].y + this.domains[this.domains.length - 1].y + this.nodeHeight) / 2;
-    const visibleProducts = this.getVisibleProducts();
-    const targetMidY = visibleProducts.length > 0 ?
-      (visibleProducts[0].y + visibleProducts[visibleProducts.length - 1].y + this.nodeHeight) / 2 :
+    const targetMidY = this.products.length > 0 ?
+      (this.products[0].y + this.products[this.products.length - 1].y + this.nodeHeight) / 2 :
       sourceMidY;
     const midX = sx + dx/2;
 
@@ -427,10 +426,8 @@ export class SankeyDiagramComponent implements OnInit {
    */
   calculateLayout(): void {
     const verticalPadding = 60;
-    // Use filtered nodes for products and classifications (only those with count > 0)
-    const visibleProducts = this.getVisibleProducts();
-    const visibleClassifications = this.getVisibleClassifications();
-    const columns = [this.domains, visibleProducts, visibleClassifications];
+    // Show all nodes regardless of count, but only connections will be filtered
+    const columns = [this.domains, this.products, this.classifications];
 
     columns.forEach((nodes, columnIndex) => {
       if (nodes.length === 0) return; // Skip empty columns

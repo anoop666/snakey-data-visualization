@@ -265,7 +265,10 @@ export class SankeyDiagramComponent implements OnInit {
 
     // Calculate middle points
     const sourceMidY = (this.domains[0].y + this.domains[this.domains.length - 1].y + this.nodeHeight) / 2;
-    const targetMidY = (this.products[0].y + this.products[this.products.length - 1].y + this.nodeHeight) / 2;
+    const visibleProducts = this.getVisibleProducts();
+    const targetMidY = visibleProducts.length > 0 ?
+      (visibleProducts[0].y + visibleProducts[visibleProducts.length - 1].y + this.nodeHeight) / 2 :
+      sourceMidY;
     const midX = sx + dx/2;
 
     // For domain to product connections
@@ -424,9 +427,14 @@ export class SankeyDiagramComponent implements OnInit {
    */
   calculateLayout(): void {
     const verticalPadding = 60;
-    const columns = [this.domains, this.products, this.classifications];
+    // Use filtered nodes for products and classifications (only those with count > 0)
+    const visibleProducts = this.getVisibleProducts();
+    const visibleClassifications = this.getVisibleClassifications();
+    const columns = [this.domains, visibleProducts, visibleClassifications];
 
     columns.forEach((nodes, columnIndex) => {
+      if (nodes.length === 0) return; // Skip empty columns
+
       const totalHeight = nodes.length * this.nodeHeight;
       let spacing: number;
 
@@ -485,12 +493,12 @@ export class SankeyDiagramComponent implements OnInit {
       this.updateCountsForSelectedDomain(node);
 
       this.domainToProductLinks.forEach(link => {
-        if (link.source.id === node.id) {
+        if (link.source.id === node.id && link.target.count > 0) {
           link.highlighted = true;
           link.target.selected = true;
 
           this.productToClassificationLinks.forEach(classLink => {
-            if (classLink.source.id === link.target.id) {
+            if (classLink.source.id === link.target.id && classLink.target.count > 0) {
               classLink.highlighted = true;
               classLink.target.selected = true;
             }
@@ -509,7 +517,7 @@ export class SankeyDiagramComponent implements OnInit {
       });
 
       this.productToClassificationLinks.forEach(link => {
-        if (link.source.id === node.id) {
+        if (link.source.id === node.id && link.target.count > 0) {
           link.highlighted = true;
           link.target.selected = true;
         }
@@ -621,5 +629,27 @@ export class SankeyDiagramComponent implements OnInit {
    */
   anyNodeSelected(): boolean {
     return [...this.domains, ...this.products, ...this.classifications].some(node => node.selected);
+  }
+
+  /**
+   * Gets filtered products with count > 0
+   * @author Anoop
+   * @date 2024-12-19
+   * @description Returns only products that have a count greater than 0
+   * @returns Array of product nodes with count > 0
+   */
+  getVisibleProducts(): SankeyNode[] {
+    return this.products.filter(product => product.count > 0);
+  }
+
+  /**
+   * Gets filtered classifications with count > 0
+   * @author Anoop
+   * @date 2024-12-19
+   * @description Returns only classifications that have a count greater than 0
+   * @returns Array of classification nodes with count > 0
+   */
+  getVisibleClassifications(): SankeyNode[] {
+    return this.classifications.filter(classification => classification.count > 0);
   }
 }

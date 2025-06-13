@@ -73,7 +73,7 @@ export class SankeyDiagramComponent implements OnInit {
   columnWidth = 220;
   columnSpacing = 120;
   nodeHeight = 45;
-  margin = { top: 40, left: 160 };
+  margin = { top: 40, left: 40 }; // Reduced left margin from 160 to 40
   trunkOffset = 30;
   radius = 80;
   totalCount: number = 0;
@@ -195,17 +195,17 @@ export class SankeyDiagramComponent implements OnInit {
    * @returns SVG path string for the branch
    */
   generateBranchPath(node: SankeyNode): string {
-    const startX = this.margin.left - 20;
+    const startX = this.margin.left - 10; // Adjusted for new left margin
     const endX = this.getDomainX();
     const y = node.y + this.nodeHeight / 2;
     const mainLineY = (this.domains[0].y + this.domains[this.domains.length - 1].y + this.nodeHeight) / 2;
-    const branchPoint = startX + 40; // Point where branches start
+    const branchPoint = startX + 30; // Reduced from 40 to 30
 
     // Create curved path from the branch point
     return `
       M ${branchPoint} ${mainLineY}
-      C ${branchPoint + 30} ${mainLineY}
-        ${branchPoint + 30} ${y}
+      C ${branchPoint + 20} ${mainLineY}
+        ${branchPoint + 20} ${y}
         ${endX} ${y}
     `;
   }
@@ -218,7 +218,7 @@ export class SankeyDiagramComponent implements OnInit {
    * @returns SVG path string for the main horizontal line
    */
   generateMainHorizontalLine(): string {
-    const startX = this.margin.left - 20;
+    const startX = this.margin.left - 10; // Adjusted for new left margin
     const mainLineY = (this.domains[0].y + this.domains[this.domains.length - 1].y + this.nodeHeight) / 2;
 
     return `
@@ -237,7 +237,7 @@ export class SankeyDiagramComponent implements OnInit {
   generateTrunkPath(): string {
     const startX = this.margin.left;
     const mainLineY = (this.domains[0].y + this.domains[this.domains.length - 1].y + this.nodeHeight) / 2;
-    const controlPoint = 40;
+    const controlPoint = 30; // Reduced from 40 to 30
 
     return `
       M ${startX} ${mainLineY}
@@ -305,7 +305,7 @@ export class SankeyDiagramComponent implements OnInit {
    * @returns X coordinate for domain column
    */
   getDomainX(): number {
-    return this.margin.left + this.trunkOffset + 80;
+    return this.margin.left + this.trunkOffset + 20; // Reduced offset from 80 to 20
   }
 
   /**

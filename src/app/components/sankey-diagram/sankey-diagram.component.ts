@@ -490,14 +490,20 @@ export class SankeyDiagramComponent implements OnInit {
       this.updateCountsForSelectedDomain(node);
 
       this.domainToProductLinks.forEach(link => {
-        if (link.source.id === node.id && link.target.count > 0) {
+        if (link.source.id === node.id) {
           link.highlighted = true;
-          link.target.selected = true;
+          // Only select target if it has count > 0
+          if (link.target.count > 0) {
+            link.target.selected = true;
+          }
 
           this.productToClassificationLinks.forEach(classLink => {
-            if (classLink.source.id === link.target.id && classLink.target.count > 0) {
+            if (classLink.source.id === link.target.id) {
               classLink.highlighted = true;
-              classLink.target.selected = true;
+              // Only select target if it has count > 0
+              if (classLink.target.count > 0) {
+                classLink.target.selected = true;
+              }
             }
           });
         }
@@ -514,9 +520,12 @@ export class SankeyDiagramComponent implements OnInit {
       });
 
       this.productToClassificationLinks.forEach(link => {
-        if (link.source.id === node.id && link.target.count > 0) {
+        if (link.source.id === node.id) {
           link.highlighted = true;
-          link.target.selected = true;
+          // Only select target if it has count > 0
+          if (link.target.count > 0) {
+            link.target.selected = true;
+          }
         }
       });
     } else {

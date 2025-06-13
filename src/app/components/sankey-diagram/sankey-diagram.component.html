@@ -80,32 +80,28 @@
             <g class="links">
                 <!-- Domain to Product Links -->
                 @for (link of domainToProductLinks; track link.source.id + link.target.id) {
-                    @if (link.target.count > 0) {
-                        <path [attr.d]="generateSmoothCurvePath(
-                            getDomainX() + columnWidth,
-                            link.source.y,
-                            link.source.height,
-                            getProductX(),
-                            link.target.y,
-                            link.target.height)"
-                            class="link"
-                            [class.highlighted]="link.highlighted" />
-                    }
+                    <path [attr.d]="generateSmoothCurvePath(
+                        getDomainX() + columnWidth,
+                        link.source.y,
+                        link.source.height,
+                        getProductX(),
+                        link.target.y,
+                        link.target.height)"
+                        class="link"
+                        [class.highlighted]="link.highlighted && link.target.count > 0" />
                 }
 
                 <!-- Product to Classification Links -->
                 @for (link of productToClassificationLinks; track link.source.id + link.target.id) {
-                    @if (link.target.count > 0) {
-                        <path [attr.d]="generateSmoothCurvePath(
-                            getProductX() + columnWidth,
-                            link.source.y,
-                            link.source.height,
-                            getClassificationX(),
-                            link.target.y,
-                            link.target.height)"
-                            class="link"
-                            [class.highlighted]="link.highlighted" />
-                    }
+                    <path [attr.d]="generateSmoothCurvePath(
+                        getProductX() + columnWidth,
+                        link.source.y,
+                        link.source.height,
+                        getClassificationX(),
+                        link.target.y,
+                        link.target.height)"
+                        class="link"
+                        [class.highlighted]="link.highlighted && link.target.count > 0" />
                 }
             </g>
         </g>
@@ -156,8 +152,7 @@
         @for (node of products; track node.id) {
             <g (click)="onNodeClick(node, $event)"
                class="node-group"
-               [class.selected]="node.selected"
-               [class.zero-count]="node.count === 0">
+               [class.selected]="node.selected">
                 <rect [attr.x]="getProductX()"
                       [attr.y]="node.y"
                       [attr.width]="columnWidth"
@@ -197,8 +192,7 @@
         @for (node of classifications; track node.id) {
             <g (click)="onNodeClick(node, $event)"
                class="node-group"
-               [class.selected]="node.selected"
-               [class.zero-count]="node.count === 0">
+               [class.selected]="node.selected">
                 <rect [attr.x]="getClassificationX()"
                       [attr.y]="node.y"
                       [attr.width]="columnWidth"

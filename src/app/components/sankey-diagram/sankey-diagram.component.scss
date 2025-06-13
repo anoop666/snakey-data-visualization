@@ -117,40 +117,6 @@
       stroke-width: 2px;
     }
   }
-
-  // Zero count nodes styling
-  &.zero-count {
-    opacity: 0.5;
-
-    .node {
-      fill: #f5f5f5;
-      stroke: #d9d9d9;
-      stroke-dasharray: 3,3;
-    }
-
-    .node-text, .node-count {
-      fill: #999;
-    }
-
-    &:hover {
-      opacity: 0.7;
-    }
-
-    // Override selected state for zero count nodes
-    &.selected {
-      opacity: 0.8;
-
-      .node {
-        fill: #e6f7ff;
-        stroke: #91d5ff;
-        stroke-dasharray: 3,3;
-      }
-
-      .node-text, .node-count {
-        fill: #666;
-      }
-    }
-  }
 }
 
 // Node Base Styles
